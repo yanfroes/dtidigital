@@ -31,7 +31,7 @@ class CompanyGroupsController < ApplicationController
 
     respond_to do |format|
       if @company_group.save
-        format.html { redirect_to @company_group, notice: 'Company group was successfully created.' }
+        format.html { redirect_to company_groups_path, notice: 'Company group was successfully created.' }
         format.json { render :show, status: :created, location: @company_group }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class CompanyGroupsController < ApplicationController
     @company_groups = CompanyGroup.all
     respond_to do |format|
       if @company_group.update(company_group_params)
-        format.html { redirect_to @company_group, notice: 'Company group was successfully updated.' }
+        format.html { redirect_to company_groups_path, notice: 'Company group was successfully updated.' }
         format.json { render :show, status: :ok, location: @company_group }
       else
         format.html { render :edit }
