@@ -14,6 +14,7 @@ class CompanyGroupsController < ApplicationController
 
   # GET /company_groups/new
   def new
+    @company_groups = CompanyGroup.all
     @company_group = CompanyGroup.new
   end
 
@@ -24,6 +25,7 @@ class CompanyGroupsController < ApplicationController
   # POST /company_groups
   # POST /company_groups.json
   def create
+    @company_groups = CompanyGroup.all
     @company_group = CompanyGroup.new(company_group_params)
 
     respond_to do |format|
@@ -40,6 +42,7 @@ class CompanyGroupsController < ApplicationController
   # PATCH/PUT /company_groups/1
   # PATCH/PUT /company_groups/1.json
   def update
+    @company_groups = CompanyGroup.all
     respond_to do |format|
       if @company_group.update(company_group_params)
         format.html { redirect_to @company_group, notice: 'Company group was successfully updated.' }
