@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :father_group %>
-    <%= form.select :father_group, @company_groups.collect { |company_group| [company_group.id] } %>
+    <%= form.select :father_group, @company_groups.collect { |company_group| [company_group.name, company_group.id] } %>
   </div>
 
   <div class="actions">
