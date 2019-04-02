@@ -1,46 +1,66 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
-<h1>Company Groups</h1>
-<button type="button" class="btn btn-dark" style="margin-top: 30px;"><%= link_to 'Criar novo CompanyGroup', new_company_group_path %></button>
-<table style="margin-top: 30px;">
-  <thead>
-    <tr class="paddingg text-center">
-      <th class="paddingg">ID</th>
-      <th class="paddingg">Nome</th>
-      <th class="paddingg">Grupo Pai</th>
-      <th colspan="3" class="paddingg">Ações</th>
-    </tr>
-  </thead>
+  <h1>Company Groups</h1>
+  <button type="button" class="btn btn-dark" style="margin-top: 30px;"><%= link_to 'Criar novo CompanyGroup', new_company_group_path %></button>
+  <table style="margin-top: 30px;">
+    <thead>
+      <tr class="paddingg text-center">
+        <th class="paddingg">ID</th>
+        <th class="paddingg">Nome</th>
+        <th class="paddingg">Grupo Pai</th>
+        <th colspan="3" class="paddingg">Ações</th>
+      </tr>
+    </thead>
 
-  <tbody>
+    <tbody>
+      <% @company_groups.each do |company_group| %>
+      <tr class="paddingg text-center">
+        <td class="paddingg"><%= company_group.id %></td>
+        <td class="paddingg"><%= company_group.name %></td>
+        <td class="paddingg"><%= company_group.father_group %></td>
+        <td class="paddingg"><%= link_to 'Ver', company_group %></td>
+        <td class="paddingg"><%= link_to 'Editar', edit_company_group_path(company_group) %></td>
+        <td class="paddingg"><%= link_to 'Destruir', company_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <ul class="nav nav-tabs" style="margin-top: 30px;">
     <% @company_groups.each do |company_group| %>
-    <tr class="paddingg text-center">
-      <td class="paddingg"><%= company_group.id %></td>
-      <td class="paddingg"><%= company_group.name %></td>
-      <td class="paddingg"><%= company_group.father_group %></td>
-      <td class="paddingg"><%= link_to 'Ver', company_group %></td>
-      <td class="paddingg"><%= link_to 'Editar', edit_company_group_path(company_group) %></td>
-      <td class="paddingg"><%= link_to 'Destruir', company_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+    <li><a data-toggle="tab" href="#<%= company_group.name %>"> <%= company_group.name %> , <%= company_group.id %> </a></li>
     <% end %>
-  </tbody>
-</table>
-<ul class="nav nav-tabs" style="margin-top: 30px;">
-  <% @company_groups.each do |company_group| %>
-  <li><a data-toggle="tab" href="#<%= company_group.name %>"> <%= company_group.name %> , <%= company_group.id %> </a></li>
-  <% end %>
-</ul>
+  </ul>
 
-<div class="tab-content">
-<% @company_groups.each do |company_group| %>
-  <div id="<%= company_group.name %>" class="tab-pane fade">
-    {
-      <p>{id:<%= company_group.id %>, nome:<%= company_group.name %>, grupo_pai:<%= company_group.father_group %>},</p>
+  <div class="tab-content">
+    <% @company_groups.each do |company_group| %>
 
-    }
+    <div id="<%= company_group.name %>" class="tab-pane fade">
+      {
+        <p>{id:<%= company_group.id %>, nome:<%= company_group.name %>, grupo_pai:<%= company_group.father_group %>},</p>
+        <% @hashs.each do |hash| %>
+        <% if hash.father_group == company_group.id %>
+        <p>{id:<%= hash.id %>, nome:<%= hash.name %>, grupo_pai:<%= hash.father_group %>},</p>
+        <% @tests.each do |test| %>
+        <% if test.father_group == hash.id%>
+        <p>{id:<%= test.id %>, nome:<%= test.name %>, grupo_pai:<%= test.father_group %>},</p>
+        <% @others.each do |other| %>
+        <% if other.father_group == test.id%>
+        <p>{id:<%= other.id %>, nome:<%= other.name %>, grupo_pai:<%= other.father_group %>},</p>
+        <% @anothers.each do |another| %>
+        <% if another.father_group == other.id%>
+        <p>{id:<%= another.id %>, nome:<%= another.name %>, grupo_pai:<%= another.father_group %>},</p>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+      }
+    </div>
+    <% end %>
   </div>
-<% end %>
-</div>
 
 </div>
 

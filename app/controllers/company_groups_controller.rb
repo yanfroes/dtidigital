@@ -5,6 +5,10 @@ class CompanyGroupsController < ApplicationController
   # GET /company_groups.json
   def index
     @company_groups = CompanyGroup.all
+    @hashs = CompanyGroup.all
+    @tests = CompanyGroup.all
+    @others = CompanyGroup.all
+    @anothers = CompanyGroup.all
   end
 
   # GET /company_groups/1
