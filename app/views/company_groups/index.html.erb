@@ -8,6 +8,7 @@
         <th class="paddingg">ID</th>
         <th class="paddingg">Nome</th>
         <th class="paddingg">Grupo Pai</th>
+        <th class="paddingg">Parent ID</th>
         <th colspan="3" class="paddingg">Ações</th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
         <td class="paddingg"><%= company_group.id %></td>
         <td class="paddingg"><%= company_group.name %></td>
         <td class="paddingg"><%= company_group.father_group %></td>
+        <td class="paddingg"><%= company_group.parent_id %></td>
         <td class="paddingg"><%= link_to 'Ver', company_group %></td>
         <td class="paddingg"><%= link_to 'Editar', edit_company_group_path(company_group) %></td>
         <td class="paddingg"><%= link_to 'Destruir', company_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -25,6 +27,13 @@
       <% end %>
     </tbody>
   </table>
+
+  <% @company_groups.each do |company_group| %>
+    <h1> <% company_group.subtree_ids %> </h1>
+
+  <% end %>
+
+
   <ul class="nav nav-tabs" style="margin-top: 30px;">
     <% @company_groups.each do |company_group| %>
     <li><a data-toggle="tab" href="#<%= company_group.name %>"> <%= company_group.name %> , <%= company_group.id %> </a></li>

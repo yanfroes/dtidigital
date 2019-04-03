@@ -5,10 +5,16 @@
   <%= @company_group.name %>
 </p>
 
-<p>
-  <strong>Father group:</strong>
-  <%= @company_group.father_group %>
-</p>
+
+<ul id="menu">
+  {
+  <% @company_group.subtree.each do |company_group| %>
+
+      <p>{id:<%= company_group.id %>, nome:<%= company_group.name %>, grupo_pai:<%= company_group.parent_id %>},</p>
+
+  <% end %>
+}
+</ul>
 
 <%= link_to 'Edit', edit_company_group_path(@company_group) %> |
 <%= link_to 'Back', company_groups_path %>

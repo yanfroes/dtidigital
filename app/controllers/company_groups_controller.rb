@@ -14,6 +14,7 @@ class CompanyGroupsController < ApplicationController
   # GET /company_groups/1
   # GET /company_groups/1.json
   def show
+      @company_groups = CompanyGroup.all
   end
 
   # GET /company_groups/new
@@ -77,6 +78,6 @@ class CompanyGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_group_params
-      params.require(:company_group).permit(:name, :father_group)
+      params.require(:company_group).permit(:name, :father_group, :parent_id)
     end
 end
